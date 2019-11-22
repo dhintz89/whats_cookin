@@ -1,9 +1,10 @@
 <h1>Hello <%= @user.name %>,</h1>
 <p>
-    Here is your shopping list for @recipe.title:
+    Here is your shopping list for <%= @recipe.title %>:
 </p>
+<br>
 <ul>@recipe.ingredients.each do |ing|
-    <li><%= ing.quantity %> <%= ing.name %></li>
+    <li><%= ing.quantity %><%= ing.measure %> <%= ing.name %></li>
 end</ul>
 
 <p>Thank you for using What's Cookin. Enjoy your meal!</p>

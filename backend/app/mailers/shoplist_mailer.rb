@@ -3,7 +3,7 @@ class ShoplistMailer < ApplicationMailer
   
     def send_list_email
       @user = params[:user]
-      @url = 
+      @recipe = params[:recipe]
       mail(to: @user.email, subject: "What's Cookin Shopping List")
     end
 
