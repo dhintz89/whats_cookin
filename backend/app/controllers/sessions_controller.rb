@@ -5,7 +5,6 @@ class SessionsController < ApplicationController
         if @user && @user.authenticate(params[:password])
             session[:user_id] = @user.id
             render json: @user
-            binding.pry
         else
             head(:forbidden)
         end

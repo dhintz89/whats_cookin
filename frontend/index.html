@@ -3,56 +3,61 @@
     <head>
         <meta charset="utf-8">
         <title>What's Cookin</title>
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" type="text/css" href="style.css"/>
     </head>
-    <body>
-        <div class="signup">
-            <h2>Create a New Profile</h2>
-            <form id='signup-form'>
-                <p><label>What is your name?
-                    <input class="name-input" type=text>
-                </label></p>
-                <p><label>How would you like us to send you shopping lists?
-                    <input class="contactPref-input" type=text>
-                </label></p>
-                <p><label>What email would you like shopping lists sent to?
-                    <input class="email-input" type=text>
-                </label></p>
-                <p><label>What phone number would you like shopping lists texted to?
-                    <input class="phone-input" type=text>
-                </label></p>
-                <p><label>What is your phone carrier (required for texting)?
-                    <input class="carrier-input" type=text>
-                </label></p>
-                <p><label>Choose a Username:
-                    <input class="username-input" type=text>
-                </label></p>
-                <p><label>Choose a Password:
-                    <input class="password-input" type=password>
-                </label> </p>
-                <p><label>Re-enter Password:
-                    <input class="verify-password" type=password>
-                </label></p>
-                <input id="signup-submit-btn" type=button value="Sign Me Up!">
-            </form>
-        </div>
-        <div class="login">
-            <h2>Existing User Login</h2>
-            <form id='login-form'>
-                <p><label>Username: 
-                    <input class="username-input" type=text>
-                </label></p>
-                <p><label>Password:
-                    <input class="password-input" type=password>
-                </label> </p>
-                <input id="login-submit-btn" type=button value="Log In">
-            </form>
-        </div>
+    <div class="flex-container">
+        <body>
+            <header>
+            </header>
 
-        <footer>
-            <input id="logout-btn" type=button value="Log Out">
-        </footer>
+            <main>
+                <div class="creds">
+                    <h1>Welcome to What's Cookin</h1>
+                    <div class="choice">
+                        <h4>Please <button id="login-link">Sign In</button> or <button id="signup-link">Create a New Account</button> to continue.</h4>
+                    </div>
+                    <div class="signup hidden">
+                        <h2>Create a New Profile</h2>
+                        <form id='signup-form'>
+                            <label>What is your name?</label><br>
+                                <input class="name-input" type=text><br>
+                            <br><label>How would you like us to send you shopping lists?</label><br>
+                                <input class="contactPref-input" type=text><br>
+                            <br><label>What email would you like shopping lists sent to?</label><br>
+                                <input class="email-input" type=text><br>
+                            <br><label>What phone number should we text your shopping lists to?</label><br>
+                                <input class="phone-input" type=text><br>
+                            <br><label>What is your phone carrier (required for texting)?</label><br>
+                                <input class="carrier-input" type=text><br>
+                            <br><br><br><label>Choose a Username:</label><br>
+                                <input class="username-input" type=text><br>
+                            <br><div>
+                                    <label>Choose a Password:</label>
+                                    <input class="password-input" type=password style="width:24%">
+                                    <label>Re-enter Password:</label>
+                                    <input class="verify-password" type=password style="width:25%">
+                                </div><br>
+                            <input id="signup-submit-btn" type=button value="Sign Me Up!">
+                        </form>
+                    </div>
+                    <div class="login hidden">
+                        <h2>Existing User Login</h2>
+                        <form id='login-form'>
+                            <label>Username:</label><br>
+                                <input class="username-input" type=text><br>
+                            <br><label>Password:</label><br>
+                                <input class="password-input" type=password><br><br>
+                            <input id="login-submit-btn" type=button value="Log In">
+                        </form>
+                    </div>
+                </div>
+            </main>
 
-        <script type="application/javascript" src="./src/index.js"></script>
-    </body>
+            <footer>
+                <input id="logout-btn" type=button value="Log Out">
+            </footer>
+
+            <script type="application/javascript" src="./src/index.js"></script>
+        </body>
+    </div>
 </html>
