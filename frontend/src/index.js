@@ -40,7 +40,7 @@ document.getElementById('signup-submit-btn').addEventListener("click", () => {
 
 // user logout
 document.getElementById('logout-btn').addEventListener("click", () => {
-    fetch(`${SESSIONS_URL}/${currentUser.id}`, {method: 'DELETE', headers: {"Content-Type": "application/json", "Accept": "application/json"}})
+    fetch(`${SESSIONS_URL}/${currentUser.id}`, {headers: {"Content-Type": "application/json", "Accept": "application/json"}, mode: 'cors', credentials: 'include', method: 'DELETE'})
     .then(currentUser = {})
     .catch(function(error) {
         alert("You are already signed out!");
@@ -66,6 +66,8 @@ function submitCredentials(url, username, password, verifyPass, name, contactPre
             "Content-Type": "application/json",
             "Accept": "application/json"
         },
+        mode: 'cors',
+        credentials: 'include',
         body: JSON.stringify(formData)
     })
     .then(resp => resp.json())
