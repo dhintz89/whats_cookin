@@ -72,17 +72,36 @@ function submitCredentials(url, username, password, verifyPass, name, contactPre
     })
     .then(resp => resp.json())
     .then(userData => currentUser = new User(userData))
-    .then(document.querySelector('.creds').classList.add('hidden'))
-    .then(console.log("done."))
-    // .then(displaySearchPage())  // change from logins to content upon success
+    .then(displaySearchPage())  // change from logins to content upon success
     .catch(function(error) {
         alert("Incorrect or Missing Credentials, try again.");
         console.log(error.message);
     });
 };
 
+function displaySearchPage() {
+    document.querySelector('.creds').classList.add('hidden')
+    document.querySelector('.search').classList.remove('hidden')
+    document.querySelector('#search_btn').addEventListener('click', () => {
+        let keyword = document.querySelector('.search .recipe_search').value;
+        fetch(`${RECIPES_URL}/search`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            mode: "cors",
+            credentials: "include",
+            body: JSON.stringify({keyword: keyword})
+        })
+        .then(resp => console.log(resp.json()))
+        // .then(datalist => displaySearchResults(datalist.results))
+    });
+};
 
-
+function displaySearchResults(search_results) {
+    console.log(search_results);
+}
 
 
 
