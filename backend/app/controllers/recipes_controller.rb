@@ -1,9 +1,8 @@
 class RecipesController < ApplicationController
 
     def search
-        kw = params[:keyword]
-        binding.pry
-        render json: {id: 123, keyword: kw, image: 'blahblah.jpeg', ingredients: ['stuff1', 'stuff2']}
+        @recipe_list = Recipe.search_collection(params[:keyword])
+        render json: @recipe_list
         # use keyword param to call search recipes from recipesAPI
         # render back results data to frontend
         # no instance creation yet

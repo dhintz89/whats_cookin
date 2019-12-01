@@ -94,13 +94,16 @@ function displaySearchPage() {
             credentials: "include",
             body: JSON.stringify({keyword: keyword})
         })
-        .then(resp => console.log(resp.json()))
-        // .then(datalist => displaySearchResults(datalist.results))
+        .then(resp => resp.json())
+        .then(datalist => {
+            displaySearchResults(datalist);
+        })
     });
 };
 
 function displaySearchResults(search_results) {
-    console.log(search_results);
+    let recipeList = search_results
+    console.log(recipeList);
 }
 
 

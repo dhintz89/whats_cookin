@@ -24,6 +24,9 @@ gem 'active_model_serializers'
 # allow sending text messages via carrier email-to-SMS gateways
 gem 'sms-easy'
 
+# allow HTTP requests from 3rd party APIs
+gem 'faraday'
+
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
