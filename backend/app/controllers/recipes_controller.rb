@@ -1,7 +1,7 @@
 class RecipesController < ApplicationController
 
     def search
-        @recipe_list = Recipe.search_collection(params[:keyword]).to_json
+        @recipe_list = Recipe.search_collection(params[:keyword])
         render json: @recipe_list
         # use keyword param to call search recipes from recipesAPI
         # render back results data to frontend

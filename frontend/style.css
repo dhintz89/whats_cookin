@@ -80,11 +80,27 @@ input[type=button] {
     height: auto;
 }
 
+.sendToTop {
+    position: absolute;
+    top: 20px;
+    left: 250px;
+}
+
 .resultSection {
-    background-color: green;
+    background-color: antiquewhite;
     margin: auto;
-    width: 800px;
-    height: 1000px;
+    width: 90%;
+    height: 90%;
     border: 1px solid white;
     z-index: 1;
+}
+
+.recipeCard {
+    border: 1px solid black;
+    width: 43%;
+    height: 20.7%;
+    margin: 2%;
+    padding: 1%;
+    float: left;
+    background-color: floralwhite
 }

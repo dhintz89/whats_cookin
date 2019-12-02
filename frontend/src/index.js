@@ -96,17 +96,29 @@ function displaySearchPage() {
             body: JSON.stringify({keyword: keyword})
         })
         .then(resp => resp.json())
-        .then(datalist => {
-            displaySearchResults(datalist);
-        })
+        .then(datalist => displaySearchResults(datalist))
     });
 };
 
 function displaySearchResults(search_results) {
-    recipeList = search_results
-    document.querySelector('.search').classList.add('hidden')
-    let resultSection = document.createElement('div')
+    let resultSection
+    let recipeList
+    let recipeCard
+
+    document.querySelector('.search').classList.add('sendToTop')
+    resultSection = document.createElement('div')    // need to add control flow for existing element
     resultSection.classList.add('resultSection')
+    recipeList = search_results.results  // need to include 'await' keyword here to avoid undefined error
+    console.log(recipeList.length)
+
+    recipeList.foreach(recipe => {
+        recipeCard = document.createElement('div')
+        recipeCard.classList.add("recipeCard")
+        recipeCard.innerHTML = `<h3>${recipe.title}</h3><p>Ready in ${recipe.readyInMinutes} minutes</p><img src=https://spoonacular.com/recipeImages/${recipe.id}-240x150.jpg alt=${recipe.image}>`
+
+        resultSection.appendChild(recipeCard)
+    })
+
     document.querySelector('main').appendChild(resultSection)
 }
 

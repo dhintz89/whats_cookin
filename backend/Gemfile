@@ -26,6 +26,7 @@ gem 'sms-easy'
 
 # allow HTTP requests from 3rd party APIs
 gem 'faraday'
+gem 'faraday-encoding'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
