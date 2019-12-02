@@ -79,3 +79,12 @@ input[type=button] {
     width: auto;
     height: auto;
 }
+
+.resultSection {
+    background-color: green;
+    margin: auto;
+    width: 800px;
+    height: 1000px;
+    border: 1px solid white;
+    z-index: 1;
+}

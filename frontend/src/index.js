@@ -79,6 +79,7 @@ function submitCredentials(url, username, password, verifyPass, name, contactPre
     });
 };
 
+// Search functionality
 function displaySearchPage() {
     document.querySelector('.creds').classList.add('hidden')
     document.querySelector('.search').classList.remove('hidden')
@@ -102,8 +103,11 @@ function displaySearchPage() {
 };
 
 function displaySearchResults(search_results) {
-    let recipeList = search_results
-    console.log(recipeList);
+    recipeList = search_results
+    document.querySelector('.search').classList.add('hidden')
+    let resultSection = document.createElement('div')
+    resultSection.classList.add('resultSection')
+    document.querySelector('main').appendChild(resultSection)
 }
 
 
@@ -121,3 +125,4 @@ class User {
         this.carrier = userData.carrier;
     }
 }
+
