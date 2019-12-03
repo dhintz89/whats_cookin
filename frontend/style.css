@@ -90,17 +90,23 @@ input[type=button] {
     background-color: antiquewhite;
     margin: auto;
     width: 90%;
-    height: 90%;
+    height: fit-content;
     border: 1px solid white;
-    z-index: 1;
 }
 
 .recipeCard {
     border: 1px solid black;
-    width: 43%;
-    height: 20.7%;
+    width: 27.14%;
+    height: fit-content;
     margin: 2%;
     padding: 1%;
     float: left;
+    text-align: center;
     background-color: floralwhite
+}
+
+.recipeCard img {
+    margin-top: 5px;
+    max-width: 100%;
+    max-height: 150px;
 }

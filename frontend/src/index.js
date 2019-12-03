@@ -97,6 +97,7 @@ function displaySearchPage() {
         })
         .then(resp => resp.json())
         .then(datalist => displaySearchResults(datalist))
+        .catch(error => console.log(error.message))
     });
 };
 
@@ -108,16 +109,16 @@ function displaySearchResults(search_results) {
     document.querySelector('.search').classList.add('sendToTop')
     resultSection = document.createElement('div')    // need to add control flow for existing element
     resultSection.classList.add('resultSection')
-    recipeList = search_results.results  // need to include 'await' keyword here to avoid undefined error
-    console.log(recipeList.length)
+    recipeList = search_results.results
 
-    recipeList.foreach(recipe => {
+    for (let i=0; i< recipeList.length; i++) {
         recipeCard = document.createElement('div')
         recipeCard.classList.add("recipeCard")
-        recipeCard.innerHTML = `<h3>${recipe.title}</h3><p>Ready in ${recipe.readyInMinutes} minutes</p><img src=https://spoonacular.com/recipeImages/${recipe.id}-240x150.jpg alt=${recipe.image}>`
+        recipeCard.innerHTML = `<h3>${recipeList[i].title}</h3><p>Ready in ${recipeList[i].readyInMinutes} minutes</p><img src=https://spoonacular.com/recipeImages/${recipeList[i].id}-240x150.jpg alt=${recipeList[i].image}>`
+        recipeCard.addEventListener('click', (e) => {alert(`You've selected ${recipeList[i].id}!`)}) // add functionality to display recipe detail
 
         resultSection.appendChild(recipeCard)
-    })
+    }
 
     document.querySelector('main').appendChild(resultSection)
 }
