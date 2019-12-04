@@ -15,4 +15,8 @@ class Recipe < ApplicationRecord
         resp.body.force_encoding('utf-8')
     end
 
+    def self.get_details(recipe_id)
+        # calls to recipe api by id and gets full recipe information
+    end
+
 end

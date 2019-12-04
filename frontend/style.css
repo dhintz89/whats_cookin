@@ -13,29 +13,38 @@ html, body {
 header {
     display: flex; 
     flex-shrink: 0;
-    height: 10%;
-    line-height: 10%;
+    height: 10vh;
+    min-height: 50px;
+    line-height: 10vh;
+    position: absolute;
+    top: 0;
+    width: 100vw;
 }
 
 main {
     display: flex;
     flex-direction: column;
     height: 80%;
+    margin-top: 11.5vh;
+    margin-bottom: 11.5vh;
 }
 
 footer {
     display: block;
-    position: relative;
-    height: 10%;
-    line-height: 10%;
+    position: absolute;
+    height: 10vh;
+    line-height: 10vh;
+    min-height: 20px;
     bottom: 0;
+    width: 100vw;
 }
 
 .flex-container {
-    display: flexbox;
+    display: flex;
     flex-direction: column;
     width: 100vw;
-    height: 100vh; 
+    min-height: 100vh; 
+    position: relative;
 }
 
 h1 {
@@ -92,18 +101,21 @@ input[type=button] {
     width: 90%;
     height: fit-content;
     border: 1px solid white;
+    box-shadow: 0 0 0 6px grey, 0 0 0 8px lightgrey;
 }
 
 .recipeCard {
     border: 1px solid black;
     width: 27.14%;
     height: fit-content;
+/* spacing issue occurs when height differs b/w cards on same row (long titles) */
     margin: 2%;
     padding: 1%;
     float: left;
     text-align: center;
     background-color: floralwhite
 }
+
 
 .recipeCard img {
     margin-top: 5px;
