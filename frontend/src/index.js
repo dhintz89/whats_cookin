@@ -60,6 +60,7 @@ function submitCredentials(url, username, password, verifyPass, name, contactPre
         phone: phone,
         carrier: carrier
     };
+    console.log(formData)
     fetch(url, {
         method: "POST", 
         headers: {
@@ -72,6 +73,7 @@ function submitCredentials(url, username, password, verifyPass, name, contactPre
     })
     .then(resp => resp.json())
     .then(userData => currentUser = new User(userData))
+    .then(console.log(currentUser))
     .then(displaySearchPage())  // change from logins to content upon success
     .catch(function(error) {
         alert("Incorrect or Missing Credentials, try again.");
@@ -81,10 +83,12 @@ function submitCredentials(url, username, password, verifyPass, name, contactPre
 
 // Search functionality
 function displaySearchPage() {
+    console.log("displaying search page")
     document.querySelector('.creds').classList.add('hidden')
     document.querySelector('.search').classList.remove('hidden')
     document.querySelector('#search_btn').addEventListener('click', () => {
         let keyword = document.querySelector('.search .recipe_search').value;
+        console.log(keyword)
         fetch(`${RECIPES_URL}/search`, {
             method: "POST",
             headers: {
@@ -102,6 +106,7 @@ function displaySearchPage() {
 };
 
 function displaySearchResults(search_results) {
+    console.log("now displaying search results")
     let resultSection
     let recipeList
     let recipeCard
@@ -124,21 +129,21 @@ function displaySearchResults(search_results) {
 }
 
 // build & display recipe details
-// function displayRecipePage(recipeId) {
-//     fetch(`${RECIPES_URL}`, {
-//         method: "POST",
-//         headers: {
-//             "Content-Type": "application/json",
-//             "Accept": "application/json"
-//         },
-//         mode: "cors",
-//         credentials: "include",
-//         body: JSON.stringify({recipe_id: recipeId})
-//     })
-//     .then(resp => resp.json())
-//     .then(recData => alert(`That Recipe is from ${recData}`))
-//     .catch(error => console.log(error.message))
-// };
+function displayRecipePage(recipeId) {
+    fetch(`${RECIPES_URL}`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        mode: "cors",
+        credentials: "include",
+        body: JSON.stringify({recipe_id: recipeId})
+    })
+    .then(resp => resp.json())
+    .then(recData => alert(`That Recipe is from ${recData}`))
+    .catch(error => console.log(error.message))
+};
 
 
 
