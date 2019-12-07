@@ -115,13 +115,30 @@ function displaySearchResults(search_results) {
         recipeCard = document.createElement('div')
         recipeCard.classList.add("recipeCard")
         recipeCard.innerHTML = `<h3>${recipeList[i].title}</h3><p>Ready in ${recipeList[i].readyInMinutes} minutes</p><img src=https://spoonacular.com/recipeImages/${recipeList[i].id}-240x150.jpg alt=${recipeList[i].image}>`
-        recipeCard.addEventListener('click', (e) => {alert(`You've selected ${recipeList[i].id}!`)}) // add functionality to display recipe detail
+        recipeCard.addEventListener('click', () => {displayRecipePage(recipeList[i].id)})
 
         resultSection.appendChild(recipeCard)
     }
 
     document.querySelector('main').appendChild(resultSection)
 }
+
+// build & display recipe details
+// function displayRecipePage(recipeId) {
+//     fetch(`${RECIPES_URL}`, {
+//         method: "POST",
+//         headers: {
+//             "Content-Type": "application/json",
+//             "Accept": "application/json"
+//         },
+//         mode: "cors",
+//         credentials: "include",
+//         body: JSON.stringify({recipe_id: recipeId})
+//     })
+//     .then(resp => resp.json())
+//     .then(recData => alert(`That Recipe is from ${recData}`))
+//     .catch(error => console.log(error.message))
+// };
 
 
 

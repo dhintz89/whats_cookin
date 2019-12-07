@@ -17,6 +17,15 @@ class Recipe < ApplicationRecord
 
     def self.get_details(recipe_id)
         # calls to recipe api by id and gets full recipe information
+        conn = Faraday.new do |connection|
+            connection.response :encoding
+            connection.adapter Faraday.default_adapter
+        end
+
+        url = "https://api.spoonacular.com/recipes/#{recipe_id}/information?includeNutrition=false&apiKey=#{ENV["RecipeAPI_KEY"]}"
+        resp = conn.get(url, {'Content-Type': 'application/json', 'Accept': 'application/json'})
+        recipe_data = JSON.parse(resp.body.force_encoding('utf-8'))
+        return recipe_data["sourceName"]
     end
 
 end
