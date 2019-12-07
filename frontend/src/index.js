@@ -141,7 +141,7 @@ function displayRecipePage(recipeId) {
         body: JSON.stringify({recipe_id: recipeId})
     })
     .then(resp => resp.json())
-    .then(recData => alert(`That Recipe is from ${recData}`))
+    .then(recData => console.log(recData))
     .catch(error => console.log(error.message))
 };
 

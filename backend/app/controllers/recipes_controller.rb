@@ -7,20 +7,21 @@ class RecipesController < ApplicationController
     end
 
     def create
-        # frontend send chosen recipe ID param, use it to call get recipe info from recipesAPI
-        # create (or find) recipe instance
+        # create (or find) Recipe instance based on chosen recipe ID param
         @recipe = Recipe.find_by(id: params[:recipe_id])
         if @recipe
             redirect_to "recipe/#{@recipe.id}"
         else
             @recipe_data = Recipe.get_details(params[:recipe_id])
-            # redirect_to "recipe/#{id}"
-            render json: @recipe_data
+            @recipe = Recipe.create(name: @recipe_data["title"], image: @recipe_data["image"], mins_to_complete: @recipe_data["readyInMinutes"], like_count: @recipe_data["aggregateLikes"], rating: @recipe_data["spoonacularScore"], source_url: @recipe_data["sourceUrl"])
+            # redirect_to "recipe/#{@recipe.id}"
         end
 
     end
 
     def show
         # render recipe info based on passed ID param
+        # @recipe = Recipe.find(params[:id])
+        # render json: @recipe
     end
 end
