@@ -12,16 +12,14 @@ class RecipesController < ApplicationController
         if @recipe
             redirect_to "recipe/#{@recipe.id}"
         else
-            @recipe_data = Recipe.build_from_data(params[:recipe_id])
-
-            # redirect_to "recipe/#{@recipe.id}"
+            @recipe = Recipe.build_from_data(params[:recipe_id])
+            redirect_to "recipe/#{@recipe.id}"
         end
-
     end
 
     def show
-        # render recipe info based on passed ID param
-        # @recipe = Recipe.find(params[:id])
-        # render json: @recipe
+        render recipe info based on passed ID param
+        @recipe = Recipe.find(params[:id])
+        render json: @recipe
     end
 end

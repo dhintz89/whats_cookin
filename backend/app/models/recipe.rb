@@ -30,16 +30,23 @@ class Recipe < ApplicationRecord
 
     def self.build_from_data(recipe_id)
         # creates new recipe and associated obects from returned api data
-        @recipe = Recipe.get_details(recipe_id)
-
-        @instructions = []
-        @recipe_ingredients = []      
+        @recipe_data = Recipe.get_details(recipe_id)
+    
+        # recipe
         @recipe = Recipe.create(id: @recipe_data["id"], name: @recipe_data["title"], image: @recipe_data["image"], mins_to_complete: @recipe_data["readyInMinutes"], like_count: @recipe_data["aggregateLikes"], rating: @recipe_data["spoonacularScore"], source_url: @recipe_data["sourceUrl"])
-
-        @recipe["extendedIngredients"].each do |ing|
-            #search/build Ingredient & associate to new recipe_ingredient
-
+        # ingredients
+        @recipe_data["extendedIngredients"].each do |ing|
+            if Ingredient.exists?(ing["id"])
+                ing_type = Ingredient.find(ing["id"])
+            else
+                ing_type = Ingredient.create(id: ing["id"], name: ing["name"], store_location: ing["aisle"])
+            end
+            ingredient = RecipeIngredient.create(ingredient_id: ing_type.id, recipe_id: @recipe.id, quantity: ing["measures"]["us"]["amount"], measure: ing["measures"]["us"]["unitLong"])
         end
-
+        # instructions
+        @recipe_data["analyzedInstructions"][0]["steps"].each do |inst|
+            instruction = Instruction.create(recipe_id: @recipe.id, description: inst["step"])
+        end
+        return @recipe
     end
 end
