@@ -12,8 +12,8 @@ class RecipesController < ApplicationController
         if @recipe
             redirect_to "recipe/#{@recipe.id}"
         else
-            @recipe_data = Recipe.get_details(params[:recipe_id])
-            @recipe = Recipe.create(name: @recipe_data["title"], image: @recipe_data["image"], mins_to_complete: @recipe_data["readyInMinutes"], like_count: @recipe_data["aggregateLikes"], rating: @recipe_data["spoonacularScore"], source_url: @recipe_data["sourceUrl"])
+            @recipe_data = Recipe.build_from_data(params[:recipe_id])
+
             # redirect_to "recipe/#{@recipe.id}"
         end
 
