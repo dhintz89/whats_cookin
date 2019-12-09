@@ -120,7 +120,7 @@ function displaySearchResults(search_results) {
         recipeCard = document.createElement('div')
         recipeCard.classList.add("recipeCard")
         recipeCard.innerHTML = `<h3>${recipeList[i].title}</h3><p>Ready in ${recipeList[i].readyInMinutes} minutes</p><img src=https://spoonacular.com/recipeImages/${recipeList[i].id}-240x150.jpg alt=${recipeList[i].image}>`
-        recipeCard.addEventListener('click', () => {displayRecipePage(recipeList[i].id)})
+        recipeCard.addEventListener('click', () => {selectRecipe(recipeList[i].id)})
 
         resultSection.appendChild(recipeCard)
     }
@@ -129,7 +129,7 @@ function displaySearchResults(search_results) {
 }
 
 // build & display recipe details
-function displayRecipePage(recipeId) {
+function selectRecipe(recipeId) {
     fetch(`${RECIPES_URL}`, {
         method: "POST",
         headers: {
@@ -140,10 +140,25 @@ function displayRecipePage(recipeId) {
         credentials: "include",
         body: JSON.stringify({recipe_id: recipeId})
     })
-    .then(resp => resp.json())
-    .then(recData => alert(`Recipe ${recData.title} called`))
+    .then(fetch(`${RECIPES_URL}/${recipeId}`, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        mode: "cors",
+        credentials: "include"
+    })
+        .then(resp => resp.json())
+        .then(recipe => displayRecipe(recipe))
+        .catch(error => console.log(error.message)))
     .catch(error => console.log(error.message))
 };
+
+function displayRecipe(recipe) {
+    console.log(recipe.name)
+    alert(`Display data for recipe: ${recipe.name}`)
+}
 
 
 

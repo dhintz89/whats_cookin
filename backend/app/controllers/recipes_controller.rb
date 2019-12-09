@@ -10,16 +10,17 @@ class RecipesController < ApplicationController
         # create (or find) Recipe instance based on chosen recipe ID param
         @recipe = Recipe.find_by(id: params[:recipe_id])
         if @recipe
-            redirect_to "recipe/#{@recipe.id}"
+            # render @recipe.id.to_json
         else
             @recipe = Recipe.build_from_data(params[:recipe_id])
-            redirect_to "recipe/#{@recipe.id}"
+            head(:no_content)
+            # render @recipe.id.to_json
         end
     end
 
     def show
-        render recipe info based on passed ID param
+        # render recipe info based on passed ID param
         @recipe = Recipe.find(params[:id])
-        render json: @recipe
+        render json: @recipe.to_json
     end
 end
