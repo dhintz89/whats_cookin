@@ -156,9 +156,9 @@ function selectRecipe(recipeId) {
     .catch(error => console.log(error.message))
 };
 
-function displayRecipe(recipe) {
-    console.log(recipe.name)
-    alert(`Display data for recipe: ${recipe.name}`)
+function displayRecipe(recipeData) {
+    let recipe = new Recipe(recipeData)
+    console.log(recipe)
 }
 
 
@@ -177,3 +177,14 @@ class User {
     }
 }
 
+class Recipe {
+    constructor(recipeData) {
+        this.id = recipeData.id;
+        this.name = recipeData.name;
+        this.image = recipeData.image;
+        this.minsToComplete = recipeData.mins_to_complete;
+        this.likeCount = recipeData.like_count;
+        this.rating = recipeData.rating;
+        this.sourceUrl = recipeData.source_url;
+    }
+}
