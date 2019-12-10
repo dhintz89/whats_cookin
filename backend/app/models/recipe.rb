@@ -34,6 +34,7 @@ class Recipe < ApplicationRecord
     
         # recipe
         @recipe = Recipe.create(id: @recipe_data["id"], name: @recipe_data["title"], image: @recipe_data["image"], mins_to_complete: @recipe_data["readyInMinutes"], like_count: @recipe_data["aggregateLikes"], rating: @recipe_data["spoonacularScore"], source_url: @recipe_data["sourceUrl"])
+        
         # ingredients
         @recipe_data["extendedIngredients"].each do |ing|
             if Ingredient.exists?(ing["id"])
@@ -43,6 +44,7 @@ class Recipe < ApplicationRecord
             end
             ingredient = RecipeIngredient.create(ingredient_id: ing_type.id, recipe_id: @recipe.id, quantity: ing["measures"]["us"]["amount"], measure: ing["measures"]["us"]["unitLong"])
         end
+        
         # instructions
         @recipe_data["analyzedInstructions"][0]["steps"].each do |inst|
             instruction = Instruction.create(recipe_id: @recipe.id, description: inst["step"])

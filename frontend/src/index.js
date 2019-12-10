@@ -140,7 +140,8 @@ function selectRecipe(recipeId) {
         credentials: "include",
         body: JSON.stringify({recipe_id: recipeId})
     })
-    .then(fetch(`${RECIPES_URL}/${recipeId}`, {
+    .then(resp => resp.json())
+    .then(recId => fetch(`${RECIPES_URL}/${recId}`, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
