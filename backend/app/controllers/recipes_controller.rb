@@ -20,7 +20,7 @@ class RecipesController < ApplicationController
 
     def show
         # render recipe info based on passed ID param
-        @recipe = Recipe.find(params[:id])
-        render json: @recipe.to_json
+        recipe = Recipe.find(params[:id])
+        render json: recipe, serializer: RecipeSerializer
     end
 end

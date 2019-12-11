@@ -1,3 +1,4 @@
 class IngredientTypeSerializer < ActiveModel::Serializer
-  attributes :id, :name, :dietType, :store_location
+  attributes :id, :name, :store_location
+  has_many :recipe_ingredients
 end

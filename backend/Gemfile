@@ -18,7 +18,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'pry'
 gem 'dotenv-rails'
 
-# provide custom serializer functionality
+# provide quick serializer functionality
 gem 'active_model_serializers'
 
 # allow sending text messages via carrier email-to-SMS gateways

@@ -1,5 +1,15 @@
 class RecipeIngredientSerializer < ActiveModel::Serializer
-  attributes :id, :quantity, :measure, :onShopList
-  has_one :recipe_type_id
-  has_one :recipe_id
+  attributes :id, :ingredientType, :quantity, :measure, :onShopList, :storeLocation
+
+  belongs_to :ingredient
+  belongs_to :recipe
+
+  def ingredientType
+    object.ingredient.name
+  end
+
+  def storeLocation
+    object.ingredient.store_location
+  end
+
 end
