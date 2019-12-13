@@ -160,6 +160,10 @@ function displayRecipe(recipeData) {
     let recipe = new Recipe(recipeData)
     recipeData.recipe_ingredients.forEach(rec => new Ingredient(rec))
     recipeData.instructions.forEach(ins => new Instruction(ins))
+    document.querySelectorAll('.recipeCard').forEach(rc => rc.classList.add('hidden'))
+    let recipeDisplay = document.createElement('div')
+    recipeDisplay.classList.add("recipeDisplay")
+    document.querySelector('.resultSection').appendChild(recipeDisplay)
 }
 
 
