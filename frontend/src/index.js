@@ -151,20 +151,20 @@ function selectRecipe(recipeId) {
         credentials: "include"
     })
         .then(resp => resp.json())
-        .then(recipe => displayRecipe(recipe))
+        .then(recipe => displayRecipe(recipe.recipe))
         .catch(error => console.log(error.message)))
     .catch(error => console.log(error.message))
 };
 
 function displayRecipe(recipeData) {
     let recipe = new Recipe(recipeData)
-    console.log(recipe)
+    recipeData.recipe_ingredients.forEach(rec => new Ingredient(rec))
+    recipeData.instructions.forEach(ins => new Instruction(ins))
 }
 
 
 
-// Model Classes
-
+// ### Model Classes ###
 class User {
     constructor(userData) {
         this.id = userData.id;
@@ -177,6 +177,9 @@ class User {
     }
 }
 
+// store variable for object associations
+let store = {recipes: [], ingredients: [], instructions: []}
+
 class Recipe {
     constructor(recipeData) {
         this.id = recipeData.id;
@@ -186,5 +189,37 @@ class Recipe {
         this.likeCount = recipeData.like_count;
         this.rating = recipeData.rating;
         this.sourceUrl = recipeData.source_url;
+        store.recipes.push(this)
+    }
+
+    ingredients() {
+        return store.ingredients.filter((ing) => ing.recipeId === this.id)
+    }
+
+    instructions() {
+        return store.instructions.filter((ins) => ins.recipeId === this.id)
+    }
+}
+
+class Ingredient {
+    constructor(ingredientData) {
+        this.id = ingredientData.id
+        this.type = ingredientData.ingredientType
+        this.quantity = ingredientData.quantity
+        this.measure = ingredientData.measure
+        this.onShopList = ingredientData.onShopList
+        this.storeLocation = ingredientData.storeLocation
+        this.recipeId = ingredientData.recipe_id
+        store.ingredients.push(this)
+    }
+}
+
+class Instruction {
+    constructor(instructionData) {
+        this.id = instructionData.id
+        this.description = instructionData.description
+        this.complete = instructionData.complete
+        this.recipeId = instructionData.recipe_id
+        store.instructions.push(this)
     }
 }
