@@ -164,6 +164,17 @@ function displayRecipe(recipeData) {
     let recipeDisplay = document.createElement('div')
     recipeDisplay.classList.add("recipeDisplay")
     document.querySelector('.resultSection').appendChild(recipeDisplay)
+    let backButton = document.createElement('button')
+    backButton.id = "backButton"
+    backButton.innerText = "Back To Results"
+    backButton.addEventListener("click", () => {backToResultsPage()})
+    document.querySelector(".header").appendChild(backButton)
+}
+
+function backToResultsPage() {
+    document.querySelector(".recipeDisplay").remove()
+    document.querySelectorAll(".recipeCard").forEach(rc => rc.classList.remove("hidden"))
+    document.querySelector("#backButton").remove()
 }
 
 
