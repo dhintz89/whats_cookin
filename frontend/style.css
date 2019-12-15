@@ -146,3 +146,11 @@ input[type=button] {
     padding: 2%;
     box-sizing: border-box;
 }
+
+#ingredientList {
+    border: 1pt solid black;
+}
+
+#instructionList {
+    border: 1pt solid black;
+}

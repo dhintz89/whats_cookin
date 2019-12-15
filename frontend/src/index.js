@@ -157,18 +157,36 @@ function selectRecipe(recipeId) {
 };
 
 function displayRecipe(recipeData) {
+    console.log(recipeData)
+    // create JS objects
     let recipe = new Recipe(recipeData)
     recipeData.recipe_ingredients.forEach(rec => new Ingredient(rec))
     recipeData.instructions.forEach(ins => new Instruction(ins))
+
+    // switch views from recipe select list to recipe detail
     document.querySelectorAll('.recipeCard').forEach(rc => rc.classList.add('hidden'))
     let recipeDisplay = document.createElement('div')
     recipeDisplay.classList.add("recipeDisplay")
     document.querySelector('.resultSection').appendChild(recipeDisplay)
+    
+    // display recipe
+    let image = document.createElement('div')
+    image.innerHTML = `<img src=${recipe.image}>`
+    let ingredientList = document.createElement('div')
+    ingredientList.id ="ingredientList"
+    let instructionList = document.createElement('div')
+    instructionList.id = "instructionList"
+    recipeDisplay.appendChild(image)
+    recipeDisplay.appendChild(ingredientList)
+    recipeDisplay.appendChild(instructionList)
+
+    
+    // create back button
     let backButton = document.createElement('button')
     backButton.id = "backButton"
     backButton.innerText = "Back To Results"
     backButton.addEventListener("click", () => {backToResultsPage()})
-    document.querySelector(".header").appendChild(backButton)
+    document.querySelector("header").appendChild(backButton)
 }
 
 function backToResultsPage() {
