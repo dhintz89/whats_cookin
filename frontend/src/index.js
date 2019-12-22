@@ -167,18 +167,38 @@ function displayRecipe(recipeData) {
     document.querySelectorAll('.recipeCard').forEach(rc => rc.classList.add('hidden'))
     let recipeDisplay = document.createElement('div')
     recipeDisplay.classList.add("recipeDisplay")
+    recipeDisplay.innerHTML = `<h1>${recipe.name}</h1><br>`
     document.querySelector('.resultSection').appendChild(recipeDisplay)
     
     // display recipe
     let image = document.createElement('div')
-    image.innerHTML = `<img src=${recipe.image}>`
-    let ingredientList = document.createElement('div')
-    ingredientList.id ="ingredientList"
-    let instructionList = document.createElement('div')
-    instructionList.id = "instructionList"
+    image.innerHTML = `<img src=${recipe.image} alt=recipeImage>`
+    
+    let ingredientSection= document.createElement('div')
+    ingredientSection.id ="ingredientSection"
+    ingredientSection.innerHTML = "<h2><u>Ingredients</u></h2><br>"
+    let ingredientList = document.createElement('ul')
+    recipe.ingredients().forEach(ing => {
+        let line = document.createElement("li")
+        line.innerHTML = `<p>${ing.quantity} ${ing.measure} - ${ing.type}</p><br>`
+        ingredientList.appendChild(line)
+    })
+    ingredientSection.appendChild(ingredientList)
+    
+    let instructionSection = document.createElement('div')
+    instructionSection.id = "instructionSection"
+    instructionSection.innerHTML = "<h2><u>Instructions</u></h2><br>"
+    let instructionList = document.createElement('ol')
+    recipe.instructions().forEach(ins => {
+        let line = document.createElement("li")
+        line.innerHTML = `<p>${ins.description}</p><br>`
+        instructionList.appendChild(line)
+    })
+    instructionSection.appendChild(instructionList)
+
     recipeDisplay.appendChild(image)
-    recipeDisplay.appendChild(ingredientList)
-    recipeDisplay.appendChild(instructionList)
+    recipeDisplay.appendChild(ingredientSection)
+    recipeDisplay.appendChild(instructionSection)
 
     
     // create back button

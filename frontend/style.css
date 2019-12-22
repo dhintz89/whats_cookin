@@ -2,7 +2,6 @@
 
 * {
     margin: 0;
-    padding: 0;
 }
 
 html, body {
@@ -138,7 +137,7 @@ input[type=button] {
     display: block;
     text-align: center;
     width: 80%;
-    height: 80%;
+    min-height: 80%;
     background-color: cornsilk;
     top: 10%;
     left: 10%;
@@ -147,10 +146,15 @@ input[type=button] {
     box-sizing: border-box;
 }
 
-#ingredientList {
-    border: 1pt solid black;
+#ingredientSection {
+    float: left;
+    text-align: left;
+    margin-bottom: 4%;
+    margin-top: 3%;
+    border-bottom: 1pt solid black;
 }
 
-#instructionList {
-    border: 1pt solid black;
+#instructionSection {
+    float: left;
+    text-align: left;
 }
