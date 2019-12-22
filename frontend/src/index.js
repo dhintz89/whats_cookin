@@ -6,6 +6,8 @@ const INGREDIENTS_URL = `${BASE_URL}/ingredients`
 const INSTRUCTIONS_URL = `${BASE_URL}/instructions`
 let currentUser = {}
 
+// ### LOGIN PAGE ###
+
 // select signup or login and display correct form
 document.getElementById('login-link').addEventListener("click", () => {
     document.querySelector('.choice').classList.add('hidden');
@@ -60,7 +62,6 @@ function submitCredentials(url, username, password, verifyPass, name, contactPre
         phone: phone,
         carrier: carrier
     };
-    console.log(formData)
     fetch(url, {
         method: "POST", 
         headers: {
@@ -73,7 +74,6 @@ function submitCredentials(url, username, password, verifyPass, name, contactPre
     })
     .then(resp => resp.json())
     .then(userData => currentUser = new User(userData))
-    .then(console.log(currentUser))
     .then(displaySearchPage())  // change from logins to content upon success
     .catch(function(error) {
         alert("Incorrect or Missing Credentials, try again.");
@@ -81,9 +81,10 @@ function submitCredentials(url, username, password, verifyPass, name, contactPre
     });
 };
 
+// ### SEARCH PAGE ###
+
 // Search functionality
 function displaySearchPage() {
-    console.log("displaying search page")
     document.querySelector('.creds').classList.add('hidden')
     document.querySelector('.search').classList.remove('hidden')
     document.querySelector('#search_btn').addEventListener('click', () => {
@@ -128,6 +129,8 @@ function displaySearchResults(search_results) {
     document.querySelector('main').appendChild(resultSection)
 }
 
+// ### RECIPE DETAILS PAGE ###
+
 // build & display recipe details
 function selectRecipe(recipeId) {
     fetch(`${RECIPES_URL}`, {
@@ -157,7 +160,6 @@ function selectRecipe(recipeId) {
 };
 
 function displayRecipe(recipeData) {
-    console.log(recipeData)
     // create JS objects
     let recipe = new Recipe(recipeData)
     recipeData.recipe_ingredients.forEach(rec => new Ingredient(rec))
@@ -170,7 +172,7 @@ function displayRecipe(recipeData) {
     recipeDisplay.innerHTML = `<h1>${recipe.name}</h1><br>`
     document.querySelector('.resultSection').appendChild(recipeDisplay)
     
-    // display recipe
+    // display recipe on page
     let image = document.createElement('div')
     image.innerHTML = `<img src=${recipe.image} alt=recipeImage>`
     
@@ -178,9 +180,10 @@ function displayRecipe(recipeData) {
     ingredientSection.id ="ingredientSection"
     ingredientSection.innerHTML = "<h2><u>Ingredients</u></h2><br>"
     let ingredientList = document.createElement('ul')
+    ingredientList.classList.add("checkBoxList")
     recipe.ingredients().forEach(ing => {
         let line = document.createElement("li")
-        line.innerHTML = `<p>${ing.quantity} ${ing.measure} - ${ing.type}</p><br>`
+        line.innerHTML = `<input type="checkbox">${ing.quantity} ${ing.measure} - ${ing.type}<br>`
         ingredientList.appendChild(line)
     })
     ingredientSection.appendChild(ingredientList)
@@ -191,7 +194,15 @@ function displayRecipe(recipeData) {
     let instructionList = document.createElement('ol')
     recipe.instructions().forEach(ins => {
         let line = document.createElement("li")
-        line.innerHTML = `<p>${ins.description}</p><br>`
+        line.innerHTML = `<button class="completeStep">complete</button>${ins.description}<br>`
+        line.querySelector('button').addEventListener("click", (e) => {
+            let targetText = e.target.parentElement
+            if(targetText.style.textDecoration === "" || targetText.style.textDecoration === "none") {
+                targetText.style.textDecoration = "line-through"
+            } else {
+                targetText.style.textDecoration = "none"
+            }
+        })
         instructionList.appendChild(line)
     })
     instructionSection.appendChild(instructionList)
@@ -216,8 +227,12 @@ function backToResultsPage() {
 }
 
 
+// function sendShopList() {
+//     return Array.prototype.slice.call(document.querySelectorAll('#ingredientSection li')).filter(line => line.querySelector('input').checked)
+// }
 
-// ### Model Classes ###
+
+// ### MODEL CLASSES ###
 class User {
     constructor(userData) {
         this.id = userData.id;

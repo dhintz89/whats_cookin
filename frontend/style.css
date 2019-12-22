@@ -120,7 +120,8 @@ input[type=button] {
     padding: 1%;
     float: left;
     text-align: center;
-    background-color: floralwhite
+    background-color: floralwhite;
+    cursor: pointer;
 }
 
 
@@ -150,6 +151,7 @@ input[type=button] {
     float: left;
     text-align: left;
     margin-bottom: 4%;
+    padding-bottom: 4%;
     margin-top: 3%;
     border-bottom: 1pt solid black;
 }
@@ -157,4 +159,12 @@ input[type=button] {
 #instructionSection {
     float: left;
     text-align: left;
+}
+
+.checkBoxList {
+    list-style-type: none;
+}
+
+.completeStep {
+    font-size: 60%;
 }
