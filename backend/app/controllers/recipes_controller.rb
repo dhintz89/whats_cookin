@@ -13,7 +13,6 @@ class RecipesController < ApplicationController
             render json: @recipe.id.to_json
         else
             @recipe = Recipe.build_from_data(params[:recipe_id])
-            # head(:no_content)
             render json: @recipe.id
         end
     end

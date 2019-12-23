@@ -108,6 +108,12 @@ function displaySearchPage() {
 
 function displaySearchResults(search_results) {
     console.log("now displaying search results")
+    if(document.querySelector('.recipeCard')) {
+        document.querySelectorAll('.recipeCard').forEach(card => card.remove())
+    }
+    if(document.querySelector('.resultSection')) {
+        document.querySelector('.resultSection').remove()
+    }
     let resultSection
     let recipeList
     let recipeCard
