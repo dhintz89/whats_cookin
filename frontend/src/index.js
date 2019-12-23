@@ -166,10 +166,13 @@ function selectRecipe(recipeId) {
 };
 
 function displayRecipe(recipeData) {
-    // create JS objects
-    let recipe = new Recipe(recipeData)
-    recipeData.recipe_ingredients.forEach(rec => new Ingredient(rec))
-    recipeData.instructions.forEach(ins => new Instruction(ins))
+    // find or create JS objects
+    let recipe = store.recipes.find((recipe) => recipe.id === recipeData.id)
+    if(recipe === undefined) {      
+        recipe = new Recipe(recipeData)
+        recipeData.recipe_ingredients.forEach(rec => new Ingredient(rec))
+        recipeData.instructions.forEach(ins => new Instruction(ins))
+    }
 
     // switch views from recipe select list to recipe detail
     document.querySelectorAll('.recipeCard').forEach(rc => rc.classList.add('hidden'))
