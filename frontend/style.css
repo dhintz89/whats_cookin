@@ -168,3 +168,9 @@ input[type=button] {
 .completeStep {
     font-size: 60%;
 }
+
+.shopListButton {
+    margin-top: 5%;
+    left: 10%;
+    position: relative;
+}

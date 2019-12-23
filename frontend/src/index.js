@@ -192,10 +192,15 @@ function displayRecipe(recipeData) {
     ingredientList.classList.add("checkBoxList")
     recipe.ingredients().forEach(ing => {
         let line = document.createElement("li")
-        line.innerHTML = `<input type="checkbox">${ing.quantity} ${ing.measure} - ${ing.type}<br>`
+        line.innerHTML = `<input type="checkbox" name=${ing.id}>${ing.quantity} ${ing.measure} - ${ing.type}<br>`
         ingredientList.appendChild(line)
     })
     ingredientSection.appendChild(ingredientList)
+    let shopListButton = document.createElement('button')
+    shopListButton.classList.add("shopListButton")
+    shopListButton.innerText = "Add Selected to Shoplist"
+    shopListButton.addEventListener("click", () => {sendShopList()})
+    ingredientSection.appendChild(shopListButton)
     
     let instructionSection = document.createElement('div')
     instructionSection.id = "instructionSection"
@@ -235,10 +240,12 @@ function backToResultsPage() {
     document.querySelector("#backButton").remove()
 }
 
-
-// function sendShopList() {
-//     return Array.prototype.slice.call(document.querySelectorAll('#ingredientSection li')).filter(line => line.querySelector('input').checked)
-// }
+function sendShopList() {
+    // returns the ids of each selected recipe-ingredient -> need to POST back to backend
+    let selectedList = Array.prototype.slice.call(document.querySelectorAll('#ingredientSection li')).filter(line => line.querySelector('input').checked)
+    document.querySelectorAll('#ingredientSection li input').forEach(box => box.checked = false)
+    return selectedList.map(line => line.querySelector('input').name)
+}
 
 
 // ### MODEL CLASSES ###
