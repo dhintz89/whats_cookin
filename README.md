@@ -10,10 +10,10 @@ Have you ever been stuck trying to decide what to cook based on some ingredient 
 * ~Shopping list can cover multiple recipes - plan out your whole week in advance~
 * ~Save recipes to your personal cookbook for easy selection later~
 * Complete instructions as you go to easily follow along while you cook.
-/
+\
 
 ### RUBY VERSION
-  ruby 2.6.1p33/
+  ruby 2.6.1p33\
   Built using a Ruby on Rails API
 
 ### DEPENDENCIES
