@@ -6,11 +6,12 @@ Have you ever been stuck trying to decide what to cook based on some ingredient 
 
 * Keyword Search over 360,000 recipes from Spoonacular Database
 * Select from 6 randomly selected results based on some key information
+* ~Add your own recipe to your personal cookbook~
 * ~Select ingredients for a shopping list to be sent by text or email~
 * ~Shopping list can cover multiple recipes - plan out your whole week in advance~
 * ~Save recipes to your personal cookbook for easy selection later~
 * Complete instructions as you go to easily follow along while you cook.
-\
+
 
 ### RUBY VERSION
   ruby 2.6.1p33\

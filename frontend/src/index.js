@@ -251,13 +251,13 @@ function sendShopList() {
 // ### MODEL CLASSES ###
 class User {
     constructor(userData) {
-        this.id = userData.id;
-        this.username = userData.username;
-        this.name = userData.name;
-        this.contactPreference = userData.contactPreference;
-        this.email = userData.email;
-        this.phone = userData.phone;
-        this.carrier = userData.carrier;
+        this.id = userData.user.id;
+        this.username = userData.user.username;
+        this.name = userData.user.name;
+        this.contactPreference = userData.user.contactPreference;
+        this.email = userData.user.email;
+        this.phone = userData.user.phone;
+        this.carrier = userData.user.carrier;
     }
 }
 

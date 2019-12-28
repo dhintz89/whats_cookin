@@ -11,8 +11,8 @@ class SessionsController < ApplicationController
     end
 
     def destroy
-        binding.pry
         if session[:user_id] === params[:id]
+            binding.pry
             session.clear() # session.delete(:user_id)
             binding.pry
             head(:ok)
