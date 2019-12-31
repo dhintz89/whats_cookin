@@ -51,7 +51,7 @@ h1 {
 }
 
 .hidden {
-    visibility: hidden;
+    display: none;
 }
 
 .creds {
@@ -91,14 +91,14 @@ input[type=button] {
 .sendToTop {
     position: absolute;
     top: 20px;
-    left: 250px;
+    left: 30%;
 }
 
 #backButton {
     position: absolute;
     top: 20px;
     left: 10%;
-    padding: 1%;
+    padding: 5px;
     box-sizing: border-box;
 }
 
@@ -116,6 +116,7 @@ input[type=button] {
     width: 27.14%;
     height: fit-content;
 /* spacing issue occurs when height differs b/w cards on same row (long titles) */
+    /* line-height: 0; */
     margin: 2%;
     padding: 1%;
     float: left;
@@ -124,7 +125,6 @@ input[type=button] {
     cursor: pointer;
 }
 
-
 .recipeCard img {
     margin-top: 5px;
     max-width: 100%;
@@ -132,32 +132,28 @@ input[type=button] {
 }
 
 .recipeDisplay {
-    position: absolute;
+    position: relative;
     margin: auto;
-    z-index: 1;
-    display: block;
+    display: grid;
     text-align: center;
     width: 80%;
     min-height: 80%;
-    background-color: cornsilk;
-    top: 10%;
-    left: 10%;
-    border: 1pt solid black;
+    /* top: 10%;
+    left: 10%; */
     padding: 2%;
     box-sizing: border-box;
 }
 
 #ingredientSection {
-    float: left;
     text-align: left;
-    margin-bottom: 4%;
-    padding-bottom: 4%;
+    line-height: 1.3em;
+    margin-bottom: 25px;
+    padding-bottom: 30px;
     margin-top: 3%;
     border-bottom: 1pt solid black;
 }
 
 #instructionSection {
-    float: left;
     text-align: left;
 }
 
@@ -167,10 +163,11 @@ input[type=button] {
 
 .completeStep {
     font-size: 60%;
+    padding: 3px;
 }
 
 .shopListButton {
-    margin-top: 5%;
-    left: 10%;
+    margin-top: 12px;
+    left: 15px;
     position: relative;
 }
