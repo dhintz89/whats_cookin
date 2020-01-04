@@ -208,7 +208,7 @@ function displayRecipe(recipeData) {
     let instructionList = document.createElement('ol')
     recipe.instructions().forEach(ins => {
         let line = document.createElement("li")
-        line.innerHTML = `<button class="completeStep">complete</button>${ins.description}<br>`
+        line.innerHTML = `<button class="completeStep">complete</button>${ins.description}<br><br>`
         line.querySelector('button').addEventListener("click", (e) => {
             let targetText = e.target.parentElement
             if(targetText.style.textDecoration === "" || targetText.style.textDecoration === "none") {
@@ -232,6 +232,13 @@ function displayRecipe(recipeData) {
     backButton.innerText = "Back To Results"
     backButton.addEventListener("click", () => {backToResultsPage()})
     document.querySelector("header").appendChild(backButton)
+
+    // create sort instructions button (for live-coding exercise)
+    let sortButton = document.createElement('button')
+    sortButton.id = "ingredientSortButton"
+    sortButton.innerText = "Sort Ingredients"
+    sortButton.addEventListener("click", () => {sortInstructions(recipe.id)})
+    ingredientSection.appendChild(sortButton)
 }
 
 function backToResultsPage() {
@@ -247,8 +254,38 @@ function sendShopList() {
     return selectedList.map(line => line.querySelector('input').name)
 }
 
+function sortInstructions(recipeID) {
+    // sorts instructions alphabetically and appends to bottom of page (for live-coding exercise) 
+    fetch(`${RECIPES_URL}/${recipeID}`)
+    .then(res => res.json())
+    .then(recipe => {
+        recipe.recipe.instructions.sort(function(a, b) {
+            var nameA = a.description.toUpperCase(); // ignore upper and lowercase
+            var nameB = b.description.toUpperCase(); // ignore upper and lowercase
+            if (nameA < nameB) {
+              return -1;
+            }
+            if (nameA > nameB) {
+              return 1;
+            }
+            // names must be equal
+            return 0;
+        });
+        let sortedPane = document.createElement('div')
+        sortedPane.id = "sortedPane"
+        let instructionList = document.createElement('ul')
+        recipe.recipe.instructions.forEach(inst => {
+            let instruction = document.createElement("li")
+            instruction.innerText = `${inst.description}`
+            instructionList.appendChild(instruction)
+        });
+        sortedPane.appendChild(instructionList)
+        document.querySelector('.recipeDisplay').appendChild(sortedPane)
+    });
+}
 
 // ### MODEL CLASSES ###
+
 class User {
     constructor(userData) {
         this.id = userData.user.id;
