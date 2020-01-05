@@ -1,23 +1,23 @@
 class SessionsController < ApplicationController
+    skip_before_action :authorized, only: [:create]
 
     def create 
         @user = User.find_by(username: params[:username])
         if @user && @user.authenticate(params[:password])
-            session[:user_id] = @user.id
-            render json: @user
+            @token = encode_token({user_id: @user.id})
+            render json: {user: UserSerializer.new(@user), jwt: @token}, status: :accepted
         else
-            head(:forbidden)
+            render json: {error: 'Invalid username or password'}, status: :unauthorized
         end
     end
 
     def destroy
-        if session[:user_id] === params[:id]
-            binding.pry
-            session.clear() # session.delete(:user_id)
-            binding.pry
+        if !current_user
+            head(:unauthorized)
+        elsif current_user.id === params[:id].to_i
             head(:ok)
-        # else    # session does not currently persist
-        #     head(:forbidden)
+        else
+            head(:unauthorized)
         end
     end
 

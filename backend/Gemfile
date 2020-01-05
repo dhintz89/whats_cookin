@@ -17,6 +17,7 @@ gem 'puma', '~> 3.11'
 gem 'bcrypt', '~> 3.1.7'
 gem 'pry'
 gem 'dotenv-rails'
+gem 'jwt'
 
 # provide quick serializer functionality
 gem 'active_model_serializers'

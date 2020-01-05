@@ -1,16 +1,17 @@
 class UsersController < ApplicationController
+    skip_before_action :authorized, only: [:create]
 
     def create
         if params[:password] === params[:verifyPass]
-            @user = User.new(user_params)
-            if @user.save 
-                session[:user_id] = @user.id
-                render json: @user
+            @user = User.create(user_params)
+            if @user.valid? 
+                @token = encode_token(user_id: @user.id)
+                render json: {user: UserSerializer.new(@user), jwt: @token}, status: :created
             else
-                head(:bad_request)
+                render json: {error: "Incorrect or missing credentials, try again."}, status: :not_acceptable
             end
         else
-            head(:bad_request)
+            render json: {error: "Passwords don't match."}
         end
     end
 

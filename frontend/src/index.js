@@ -42,11 +42,12 @@ document.getElementById('signup-submit-btn').addEventListener("click", () => {
 
 // user logout
 document.getElementById('logout-btn').addEventListener("click", () => {
-    fetch(`${SESSIONS_URL}/${currentUser.id}`, {headers: {"Content-Type": "application/json", "Accept": "application/json"}, mode: 'cors', credentials: 'include', method: 'DELETE'})
+    fetch(`${SESSIONS_URL}/${currentUser.id}`, {headers: {"Content-Type": "application/json", "Accept": "application/json", "Authorization": `Bearer ${window.localStorage.getItem("token")}`}, mode: 'cors', credentials: 'include', method: 'DELETE'})
     .then(currentUser = {})
+    .then(localStorage.clear())
+    .then(backToLogin())
     .catch(function(error) {
-        alert("You are already signed out!");
-        console.log(error.message);
+        console.log(error)
     });
 });
 
@@ -73,11 +74,15 @@ function submitCredentials(url, username, password, verifyPass, name, contactPre
         body: JSON.stringify(formData)
     })
     .then(resp => resp.json())
-    .then(userData => currentUser = new User(userData))
+    .then(userData => {
+        currentUser = new User(userData)
+        window.localStorage.setItem("token", userData.jwt)
+    })
     .then(displaySearchPage())  // change from logins to content upon success
     .catch(function(error) {
-        alert("Incorrect or Missing Credentials, try again.");
-        console.log(error.message);
+        alert("Incorrect user or login info");
+        backToLogin()
+        console.log(error)
     });
 };
 
@@ -94,7 +99,8 @@ function displaySearchPage() {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Accept": "application/json"
+                "Accept": "application/json",
+                "Authorization": `Bearer ${window.localStorage.getItem("token")}`
             },
             mode: "cors",
             credentials: "include",
@@ -102,7 +108,11 @@ function displaySearchPage() {
         })
         .then(resp => resp.json())
         .then(datalist => displaySearchResults(datalist))
-        .catch(error => console.log(error.message))
+        .catch(function(error) {
+            alert("You must log in to perform that action");
+            backToLogin()
+            console.log(error)
+        });
     });
 };
 
@@ -143,7 +153,8 @@ function selectRecipe(recipeId) {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Authorization": `Bearer ${window.localStorage.getItem("token")}`
         },
         mode: "cors",
         credentials: "include",
@@ -154,15 +165,24 @@ function selectRecipe(recipeId) {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
-            "Accept": "application/json"
+            "Accept": "application/json",
+            "Authorization": `Bearer ${window.localStorage.getItem("token")}`
         },
         mode: "cors",
         credentials: "include"
     })
         .then(resp => resp.json())
         .then(recipe => displayRecipe(recipe.recipe))
-        .catch(error => console.log(error.message)))
-    .catch(error => console.log(error.message))
+        .catch(function(error) {
+            alert("You must log in to perform that action");
+            backToLogin()
+            console.log(error)
+        }))
+    .catch(function(error) {
+        alert("You must log in to perform that action");
+        backToLogin()
+        console.log(error)
+    });
 };
 
 function displayRecipe(recipeData) {
@@ -245,4 +265,20 @@ function sendShopList() {
     let selectedList = Array.prototype.slice.call(document.querySelectorAll('#ingredientSection li')).filter(line => line.querySelector('input').checked)
     document.querySelectorAll('#ingredientSection li input').forEach(box => box.checked = false)
     return selectedList.map(line => line.querySelector('input').name)
+}
+
+function backToLogin() {
+    if(document.querySelector('.recipeCard')) {
+        document.querySelectorAll('.recipeCard').forEach(card => card.remove())
+    }
+    if(document.querySelector('.resultSection')) {
+        document.querySelector('.resultSection').remove()
+    }
+    document.querySelector('.search').classList.add('hidden')
+    document.querySelector('.choice').classList.remove('hidden');
+    document.querySelector('.login').classList.add('hidden');
+    document.querySelector('.signup').classList.add('hidden');
+    document.querySelector('#login-form .username-input').value = ""
+    document.querySelector('#login-form .password-input').value = ""
+    document.querySelector('.creds').classList.remove('hidden')
 }
