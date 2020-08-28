@@ -13,9 +13,9 @@ class ApplicationController < ActionController::API
         if auth_header
             token = auth_header.split(' ')[1]
             begin
-                JWT.decode(token, ENV["JWT_Secret"])
+                return JWT.decode(token, ENV["JWT_Secret"])
             rescue JWT::DecodeError
-                nil
+                return nil
             end
         end
     end
@@ -24,6 +24,8 @@ class ApplicationController < ActionController::API
         if decoded_token
             user_id = decoded_token[0]['user_id']
             @user = User.find_by(id: user_id)
+            puts @user
+            return @user
         end
     end
 

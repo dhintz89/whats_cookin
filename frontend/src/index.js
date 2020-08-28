@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000"
+const BASE_URL = "https://whats-cookin-api.herokuapp.com" || "http://localhost:3000"
 const USERS_URL = `${BASE_URL}/users`
 const SESSIONS_URL = `${BASE_URL}/sessions`
 const RECIPES_URL = `${BASE_URL}/recipes`
