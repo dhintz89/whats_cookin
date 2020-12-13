@@ -1,4 +1,4 @@
-const BASE_URL = "https://whats-cookin-api.herokuapp.com" || "http://localhost:3000"
+const BASE_URL = "https://whats-cookin-api.herokuapp.com" // must change to "http://localhost:3000" for dev work
 const USERS_URL = `${BASE_URL}/users`
 const SESSIONS_URL = `${BASE_URL}/sessions`
 const RECIPES_URL = `${BASE_URL}/recipes`
@@ -118,15 +118,16 @@ function displaySearchPage() {
 
 function displaySearchResults(search_results) {
     console.log("now displaying search results")
-    if(document.querySelector('.recipeCard')) {
-        document.querySelectorAll('.recipeCard').forEach(card => card.remove())
+    if(document.querySelector('.recipe_outer')) {
+        document.querySelectorAll('.recipe_outer').forEach(card => card.remove())
     }
     if(document.querySelector('.resultSection')) {
         document.querySelector('.resultSection').remove()
     }
-    let resultSection
-    let recipeList
-    let recipeCard
+    let resultSection;
+    let recipeList;
+    let recipe_outer;
+    let recipe_inner;
 
     document.querySelector('.search').classList.add('sendToTop')
     resultSection = document.createElement('div')    // need to add control flow for existing element
@@ -134,12 +135,15 @@ function displaySearchResults(search_results) {
     recipeList = search_results.results
 
     for (let i=0; i< recipeList.length; i++) {
-        recipeCard = document.createElement('div')
-        recipeCard.classList.add("recipeCard")
-        recipeCard.innerHTML = `<h3>${recipeList[i].title}</h3><p>Ready in ${recipeList[i].readyInMinutes} minutes</p><img src=https://spoonacular.com/recipeImages/${recipeList[i].id}-240x150.jpg alt=${recipeList[i].image}>`
-        recipeCard.addEventListener('click', () => {selectRecipe(recipeList[i].id)})
+        recipe_outer = document.createElement('div')
+        recipe_outer.classList.add("recipe_outer")
+        recipe_inner = document.createElement('span')
+        recipe_inner.classList.add("recipe_inner")
+        recipe_inner.innerHTML = `<h3>${recipeList[i].title}</h3><p>Ready in ${recipeList[i].readyInMinutes} minutes</p><img src=https://spoonacular.com/recipeImages/${recipeList[i].id}-240x150.jpg alt=${recipeList[i].image}>`
+        recipe_outer.appendChild(recipe_inner)
+        recipe_outer.addEventListener('click', () => {selectRecipe(recipeList[i].id)})
 
-        resultSection.appendChild(recipeCard)
+        resultSection.appendChild(recipe_outer)
     }
 
     document.querySelector('main').appendChild(resultSection)
@@ -195,7 +199,7 @@ function displayRecipe(recipeData) {
     }
 
     // switch views from recipe select list to recipe detail
-    document.querySelectorAll('.recipeCard').forEach(rc => rc.classList.add('hidden'))
+    document.querySelectorAll('.recipe_outer').forEach(rc => rc.classList.add('hidden'))
     let recipeDisplay = document.createElement('div')
     recipeDisplay.classList.add("recipeDisplay")
     recipeDisplay.innerHTML = `<h1>${recipe.name}</h1><br>`
@@ -256,7 +260,7 @@ function displayRecipe(recipeData) {
 
 function backToResultsPage() {
     document.querySelector(".recipeDisplay").remove()
-    document.querySelectorAll(".recipeCard").forEach(rc => rc.classList.remove("hidden"))
+    document.querySelectorAll(".recipe_outer").forEach(rc => rc.classList.remove("hidden"))
     document.querySelector("#backButton").remove()
 }
 
@@ -268,8 +272,8 @@ function sendShopList() {
 }
 
 function backToLogin() {
-    if(document.querySelector('.recipeCard')) {
-        document.querySelectorAll('.recipeCard').forEach(card => card.remove())
+    if(document.querySelector('.recipe_outer')) {
+        document.querySelectorAll('.recipe_outer').forEach(card => card.remove())
     }
     if(document.querySelector('.resultSection')) {
         document.querySelector('.resultSection').remove()

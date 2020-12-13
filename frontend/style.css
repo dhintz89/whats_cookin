@@ -54,6 +54,10 @@ h1 {
     display: none;
 }
 
+.recipe_outer.hidden {
+    display: none;
+}
+
 .creds {
     background-color: lightcyan;
     width:60%;
@@ -104,6 +108,7 @@ input[type=button] {
 
 .resultSection {
     background-color: antiquewhite;
+    text-align: center;
     margin: auto;
     width: 90%;
     height: fit-content;
@@ -111,24 +116,78 @@ input[type=button] {
     box-shadow: 0 0 0 6px grey, 0 0 0 8px lightgrey;
 }
 
-.recipeCard {
+/* .recipeCard {
     border: 1px solid black;
     width: 27.14%;
-    height: fit-content;
+    height: fit-content; */
 /* spacing issue occurs when height differs b/w cards on same row (long titles) */
     /* line-height: 0; */
-    margin: 2%;
+    /* margin: 2%;
     padding: 1%;
     float: left;
     text-align: center;
     background-color: floralwhite;
     cursor: pointer;
+} */
+
+.recipe_outer {
+  position: relative;
+  display: inline-flex;
+  flex-direction: column;
+  height: fit-content;
+  width: fit-content;
+  background-color: #e4e4e4;
+  border-radius: 50%;
+  justify-content: center;
+  font-size: 15px;
+  box-shadow: 2px 2px 8px 2px #000;
+  padding: 42px;
+  margin: 20px;
+  cursor: pointer;
 }
 
-.recipeCard img {
+.recipe_inner {
+  align-self: center;
+  border-radius: 50%;
+  height: fit-content;
+  width: fit-content;
+  border: #dddddd solid 2px;
+  background-color: #cfcfcf;
+  font-size: 1rem;
+  box-shadow: 0 0 10px 10px #cfcfcf;
+  justify-content: center;
+  padding: 25px;
+  text-align: center;
+}
+
+.recipe_inner::after {
+  content: "";
+  position: absolute;
+  background-color: #e3e3e3;
+  height: 40%;
+  width: 20%;
+  display: block;
+  border-radius: 50%;
+  transform: rotate(34deg);
+  right: 21%;
+  top: 42%;
+  font-size: inherit;
+  box-shadow: -.6em .2em 1em 1em #e3e3e3;
+}
+
+.recipe_inner img {
     margin-top: 5px;
     max-width: 100%;
     max-height: 150px;
+    border-radius: 40%;
+    z-index: 1;
+    position: relative;
+    margin: 25px 2px;
+}
+
+.recipe_inner h3 {
+    max-width: 250px;
+    padding: 0 15px;
 }
 
 .recipeDisplay {
