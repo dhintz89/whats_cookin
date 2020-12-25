@@ -52,8 +52,14 @@
                     </div>
                 </div>
                 <div class="search hidden">
-                    <button id="search_btn">Search for Recipes</button>
+                    <div class="search_title">Enter any keyword to get some random recipes!</div>
                     <input type="text" class="recipe_search" placeholder="Enter Keyword Here">
+                    <button id="search_btn" onclick="recSearch()">Search for Recipes</button>
+                    <!-- Change to form like below, but fetch fails with "typeError: Failed to Fetch"
+                    <form onsubmit="recSearch()">
+                        <input type="text" class="recipe_search" placeholder="Enter Keyword Here">
+                        <input type="submit" id="search_btn" value="Search for Recipes">
+                    </form> -->
                 </div>
             </main>
 

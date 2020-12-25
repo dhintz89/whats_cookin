@@ -82,6 +82,12 @@ h1 {
     left: 10%;
 }
 
+.search_title {
+    font-size: 1.5em;
+    color: #fff;
+    margin-bottom: .5em;
+}
+
 form input {
     width: 95%;
     background-color: #CFCDCD;
