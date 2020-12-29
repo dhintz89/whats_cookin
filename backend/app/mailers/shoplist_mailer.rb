@@ -1,9 +1,10 @@
 class ShoplistMailer < ApplicationMailer
-    default from: 'from@example.com'
+    default from: "dhintz89@gmail.com"
   
-    def send_list_email
+    def new_list_email
+      @recipe_name = params[:recipe]
       @user = params[:user]
-      @recipe = params[:recipe]
+      @shoplist = params[:shoplist]
       mail(to: @user.email, subject: "What's Cookin Shopping List")
     end
 

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hello <%= @user.name %>,</h1>
+    <p>
+      Here is your shopping list for <strong><%= @recipe_name %></strong>:
+    </p>
+    <ul><% @shoplist.each do |item| %>
+      <li><%= item %></li>
+    <% end %></ul>
+
+    <p>Thank you for using <strong>What's Cookin'</strong>. Enjoy your meal!</p>
+  </body>
+</html>

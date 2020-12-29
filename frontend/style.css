@@ -98,6 +98,18 @@ input[type=button] {
     height: auto;
 }
 
+input[type=radio] {
+    display: inline;
+    width: auto;
+    margin: 2% 0 4% 2%;
+}
+
+form div {
+    width: 48.5%;
+    display: inline-block;
+    margin-bottom: 4%;
+}
+
 .sendToTop {
     position: absolute;
     top: 20px;

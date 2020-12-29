@@ -56,6 +56,21 @@ Rails.application.configure do
 
   config.action_mailer.perform_caching = false
 
+  config.action_mailer.delivery_method = :smtp
+  host = "https://whats-cookin-api.herokuapp.com"
+  config.action_mailer.default_url_options = { :host => host, protocol: 'http' }
+
+  # SMTP settings for gmail
+  config.action_mailer.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    # :address              => "smtp-mail.outlook.com",
+    :port                 => 587,
+    :user_name            => ENV["Email_Username"],
+    :password             => ENV["Email_Password"],
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
+
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false

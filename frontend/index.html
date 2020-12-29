@@ -20,23 +20,30 @@
                         <h2>Create a New Profile</h2>
                         <form id='signup-form'>
                             <label>What is your name (required)?</label><br>
-                                <input class="name-input" type=text><br>
+                                <input class="name-input" type=text><br><br>
                             <br><label>How would you like us to send you shopping lists (required)?</label><br>
-                                <input class="contactPref-input" type=text><br>
+                                <input type="radio" id="email" name="contactPref" class="contactPref-input" value="email">
+                                <label for="email">Email</label>
+                                <input type="radio" id="text" name="contactPref" class="contactPref-input" value="text">
+                                <label for="text">Text</label>
+                                <input type="radio" id="both" name="contactPref" class="contactPref-input" value="both">
+                                <label for="both">Both</label>
                             <br><label>What email would you like shopping lists sent to (required)?</label><br>
                                 <input class="email-input" type=text><br>
                             <br><label>What phone number should we text your shopping lists to?</label><br>
                                 <input class="phone-input" type=text><br>
                             <br><label>What is your phone carrier (required for texting)?</label><br>
                                 <input class="carrier-input" type=text><br>
-                            <br><br><br><label>Choose a Username:</label><br>
+                            <br><br><label>Choose a Username:</label><br>
                                 <input class="username-input" type=text><br>
                             <br><div>
-                                    <label>Choose a Password:</label>
-                                    <input class="password-input" type=password style="width:24%">
-                                    <label>Re-enter Password:</label>
-                                    <input class="verify-password" type=password style="width:25%">
-                                </div><br>
+                                <label>Choose a Password:</label>
+                                <input class="password-input" type=password>
+                            </div>
+                            <div>
+                                <label>Re-enter Password:</label>
+                                <input class="verify-password" type=password>
+                            </div>
                             <input id="signup-submit-btn" type=button value="Sign Me Up!">
                         </form>
                     </div>

@@ -1,0 +1,9 @@
+Hello <%= @user.name %>,
+
+Here is your shopping list for <%= @recipe_name %>:
+
+<% @shoplist.each do |item| %>
+  <%= item %>
+<% end %>
+
+Thank you for using What's Cookin'. Enjoy your meal!
