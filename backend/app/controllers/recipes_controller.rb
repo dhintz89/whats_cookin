@@ -27,13 +27,7 @@ class RecipesController < ApplicationController
         # send selected recipe-ingredients as shoplist
         @shoplist = params[:shoplist]
         @recipe = params[:recipe]
-        ShoplistMailer.with(recipe: @recipe, shoplist: @shoplist, user: current_user).new_list_email.deliver_later
+        ShoplistMailer.with(recipe: @recipe, shoplist: @shoplist, user: current_user).new_list_email.deliver_now
         render json: "Shoplist sent"
     end
 end
-
-# private
-
-# def shoplist_params
-#     params.permit(:username, :password, session: [:username, :password, :user_id])
-# end

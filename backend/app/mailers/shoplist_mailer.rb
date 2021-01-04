@@ -5,7 +5,7 @@ class ShoplistMailer < ApplicationMailer
       @recipe_name = params[:recipe]
       @user = params[:user]
       @shoplist = params[:shoplist]
-      mail(to: @user.email, subject: "What's Cookin Shopping List")
+      mail(to: @user.email, subject: "What's Cookin' Shopping List")
     end
 
 end

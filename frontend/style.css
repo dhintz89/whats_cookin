@@ -93,6 +93,14 @@ form input {
     background-color: #CFCDCD;
 }
 
+form select {
+    background-color: #CFCDCD;
+}
+
+form select:focus {
+    background-color: #fff;
+}
+
 input[type=button] {
     width: auto;
     height: auto;

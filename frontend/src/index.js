@@ -1,4 +1,4 @@
-const BASE_URL =  "https://whats-cookin-api.herokuapp.com"  // must change to "http://localhost:3000" for dev work
+const BASE_URL = "http://localhost:3000" //"https://whats-cookin-api.herokuapp.com"   // must change to "http://localhost:3000" for dev work
 const USERS_URL = `${BASE_URL}/users`
 const SESSIONS_URL = `${BASE_URL}/sessions`
 const RECIPES_URL = `${BASE_URL}/recipes`
@@ -35,9 +35,9 @@ document.getElementById('login-submit-btn').addEventListener("click" || "keypres
 document.getElementById('signup-submit-btn').addEventListener("click", () => {
     let url = USERS_URL
     let name = document.querySelector('#signup-form .name-input').value
-    let contactPreference = document.querySelector('#signup-form .contactPref-input').value
+    let contactPreference = document.querySelector('#signup-form .contactPref-input:checked').value
     let email = document.querySelector('#signup-form .email-input').value
-    let phone = document.querySelector('#signup-form .phone-input').value
+    let phone = document.querySelector('#signup-form .phone-input').value.replace(/[\s().-]/g,'')
     let carrier = document.querySelector('#signup-form .carrier-input').value
     let username = document.querySelector('#signup-form .username-input').value
     let password = document.querySelector('#signup-form .password-input').value
@@ -273,7 +273,6 @@ function backToResultsPage() {
 }
 
 function sendShopList() {
-    // returns the ids of each selected recipe-ingredient -> need to POST back to backend
     let selectedList = Array.prototype.slice.call(document.querySelectorAll('#ingredientSection li')).filter(line => line.querySelector('input').checked)
     document.querySelectorAll('#ingredientSection li input').forEach(box => box.checked = false)
     const list = selectedList.map(line => line.outerText);

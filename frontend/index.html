@@ -21,6 +21,7 @@
                         <form id='signup-form'>
                             <label>What is your name (required)?</label><br>
                                 <input class="name-input" type=text><br><br>
+
                             <br><label>How would you like us to send you shopping lists (required)?</label><br>
                                 <input type="radio" id="email" name="contactPref" class="contactPref-input" value="email">
                                 <label for="email">Email</label>
@@ -28,12 +29,41 @@
                                 <label for="text">Text</label>
                                 <input type="radio" id="both" name="contactPref" class="contactPref-input" value="both">
                                 <label for="both">Both</label>
+                                
                             <br><label>What email would you like shopping lists sent to (required)?</label><br>
-                                <input class="email-input" type=text><br>
+                                <input class="email-input" type=email><br>
                             <br><label>What phone number should we text your shopping lists to?</label><br>
-                                <input class="phone-input" type=text><br>
-                            <br><label>What is your phone carrier (required for texting)?</label><br>
-                                <input class="carrier-input" type=text><br>
+                                <input class="phone-input" type=tel placeholder="###-###-####"><br>
+                            <br><label for="carrier-input">Select your phone carrier (required for texting)?</label><br>
+                                <select name="carrier-input" class="carrier-input" type=text>
+                                    <option value="" selected disabled hidden>Select A Carrier</option>
+                                    <option value="aio">Aio Wireless</option>
+                                    <option value="alltel">Alltel</option>
+                                    <option value="ameritech">Ameritech</option>
+                                    <option value="at&t">AT&T</option>
+                                    <option value="bell-atlantic">Bell Atlantic</option>
+                                    <option value="bellsouthmobility">Bellsouth Mobility</option>
+                                    <option value="blueskyfrog">BlueSkyFrog</option>
+                                    <option value="boost">Boost Mobile</option>
+                                    <option value="cellularsouth">Cellular South</option>
+                                    <option value="comcast">Comcast PCS</option>
+                                    <option value="cricket">Cricket</option>
+                                    <option value="kajeet">kajeet</option>
+                                    <option value="metropcs">Metro PCS</option>
+                                    <option value="nextel">Nextel</option>
+                                    <option value="powertel">Powertel</option>
+                                    <option value="pscwireless">PSC Wireless</option>
+                                    <option value="qwest">Qwest</option>
+                                    <option value="southernlink">Southern Link</option>
+                                    <option value="sprint">Sprint PCS</option>
+                                    <option value="suncom">Suncom</option>
+                                    <option value="t-mobile">T-Mobile</option>
+                                    <option value="tracfone">Tracfone</option>
+                                    <option value="telus-mobility">Telus Mobility</option>
+                                    <option value="virgin">Virgin Mobile</option>
+                                    <option value="verizon">Verizon Wireless</option>
+                                </select><br>
+                                
                             <br><br><label>Choose a Username:</label><br>
                                 <input class="username-input" type=text><br>
                             <br><div>
