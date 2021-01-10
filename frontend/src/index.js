@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:3000" //"https://whats-cookin-api.herokuapp.com"   // must change to "http://localhost:3000" for dev work
+const BASE_URL = "https://whats-cookin-api.herokuapp.com"   // must change to "http://localhost:3000" for dev work
 const USERS_URL = `${BASE_URL}/users`
 const SESSIONS_URL = `${BASE_URL}/sessions`
 const RECIPES_URL = `${BASE_URL}/recipes`
@@ -289,9 +289,10 @@ function sendShopList() {
         credentials: "include",
         body: JSON.stringify({recipe: recipe, shoplist: list})
     })
-    .then(alert("Shopping List Successfully Delivered"))
+    .then(resp => resp.json())
+    .then(msg => alert(msg))
     .catch(function(error) {
-        alert("Shopping List Could Not Be Delivered")
+        alert("Shopping List Could Not Be Delivered - Error Unknown")
         console.log(error)
     })
 }
